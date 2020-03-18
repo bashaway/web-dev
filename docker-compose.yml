@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  dns:
+    build: ./
+    image: dev:web
+    container_name: web
+    hostname: web
+    restart: always
+    ports:
+      - 80:80/tcp
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      TZ: 'Asia/Tokyo'
+
