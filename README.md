@@ -10,3 +10,31 @@ uwsgi --ini /usr/share/nginx/uwsgi/uwsgi.ini
 uwsgi --stop /var/run/uwsgi/uwsgi.pid
 
 git add -A ; git commit -m "commit msg" ;  git push -u origin master
+
+
+# lets encrypt
+
+## staging
+
+```
+certbot certonly \
+ --server https://acme-staging-v02.api.letsencrypt.org/directory \
+ --preferred-challenges http-01 \
+ --agree-tos --no-eff-email \
+ --webroot -w /usr/share/nginx/html \
+ -d FQDN \
+ -m MAIL@ADDRESS
+```
+
+## production
+
+```
+certbot certonly \
+ --server https://acme-v02.api.letsencrypt.org/directory \
+ --preferred-challenges http-01 \
+ --agree-tos --no-eff-email \
+ --webroot -w /usr/share/nginx/html \
+ -d FQDN \
+ -m MAIL@ADDRESS
+```
+
