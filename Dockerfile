@@ -1,6 +1,6 @@
 FROM centos:centos7
 RUN  yum -y install epel-release ; yum -y update ; \
-     yum -y install gcc python3 python3-devel nginx git npm php ; \
+     yum -y install gcc python3 python3-devel nginx git npm php-fpm ; \
      pip3 install uwsgi ; \
      cd
 #COPY uwsgi.ini /usr/share/nginx/uwsgi/
