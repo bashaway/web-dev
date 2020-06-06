@@ -11,6 +11,7 @@ services:
     ports:
       - 80:80/tcp
       - 443:443/tcp
+      - 3000:3000/tcp
     cap_add:
       - SYS_ADMIN
     security_opt:

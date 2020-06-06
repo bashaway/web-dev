@@ -11,6 +11,27 @@ uwsgi --stop /var/run/uwsgi/uwsgi.pid
 
 git add -A ; git commit -m "commit msg" ;  git push -u origin master
 
+# FIDO demo
+
+## FIDO Alliance
+```
+git clone https://github.com/fido-alliance/webauthn-demo/
+cd webauthn-demo
+npm install
+node app
+```
+
+
+
+## apowers313
+```
+git clone --recursive https://github.com/apowers313/fido2-server-demo
+cd fido2-server-demo
+npm install
+npm start
+```
+
+
 
 # lets encrypt
 
@@ -22,8 +43,8 @@ certbot certonly \
  --preferred-challenges http-01 \
  --agree-tos --no-eff-email \
  --webroot -w /usr/share/nginx/html \
- -d FQDN \
- -m MAIL@ADDRESS
+ -d sakura01.prosper2.org \
+ -m bashaway@gmail.com
 ```
 
 ## production
