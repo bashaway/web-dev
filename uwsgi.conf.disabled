@@ -1,15 +1,49 @@
 server {
-        listen       80 default_server;
-        listen       [::]:80 default_server;
-        server_name  _;
-        root         /usr/share/nginx/uwsgi;
+    listen       80 default_server;
+    listen       443 ssl default_server;
+    server_name  _;
+    ssl_certificate      /etc/letsencrypt/live/sakura01.prosper2.org/cert.pem;
+    ssl_certificate_key  /etc/letsencrypt/live/sakura01.prosper2.org/privkey.pem;
+    return 444;
+}
 
-        # Load configuration files for the default server block.
-        include /etc/nginx/default.d/*.conf;
+server {
+    listen       443 ssl;
+    server_name  sakura01.prosper2.org;
 
-        location / {
+    ssl_certificate      /etc/letsencrypt/live/sakura01.prosper2.org/cert.pem;
+    ssl_certificate_key  /etc/letsencrypt/live/sakura01.prosper2.org/privkey.pem;
+
+    ssl_session_cache    shared:SSL:1m;
+    ssl_session_timeout  5m;
+
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+
+    location /static/ {
+        root /usr/share/nginx/html;
+    }
+
+    location / {
+            root  /usr/share/nginx/hello;
             include uwsgi_params;
-            uwsgi_pass unix:/var/run/uwsgi/uwsgi.sock;
-        }
+            uwsgi_pass unix:/var/run/uwsgi/hello.sock;
+    }
+
+    location ~ ^/app1/(.*)$ {
+            include uwsgi_params;
+            uwsgi_pass unix:/var/run/uwsgi/app1.sock;
+            uwsgi_param SCRIPT_NAME /app1;
+            uwsgi_param PATH_INFO /$1;
+    }
+}
+
+server {
+    listen       80;
+    server_name  sakura01.prosper2.org;
+
+    location / {
+        root /usr/share/nginx/html;
+    }
 
 }
