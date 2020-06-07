@@ -3,7 +3,9 @@ Description = uWSGI
 After = syslog.target
 
 [Service]
-ExecStart = /usr/local/bin/uwsgi --ini /usr/share/nginx/uwsgi//uwsgi.ini
+WorkingDirectory=/usr/share/nginx/uwsgi
+Environment="PATH=/usr/share/nginx/uwsgi/venv/bin"
+ExecStart = /usr/share/nginx/uwsgi/venv/bin/uwsgi --ini /usr/share/nginx/uwsgi/uwsgi.ini
 Restart=always
 KillSignal=SIGQUIT
 Type=notify

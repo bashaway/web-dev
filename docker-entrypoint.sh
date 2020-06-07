@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 if [ ! -d "/etc/letsencrypt/live" ]; then
    rm -f /usr/share/nginx/html/index.html 
    echo 'sample' > /usr/share/nginx/html/index.html
