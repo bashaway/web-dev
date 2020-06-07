@@ -12,7 +12,11 @@ server {
     ssl_prefer_server_ciphers  on;
 
     location / {
-        root   html;
-        index  index.html index.htm;
+            root  /usr/share/nginx/uwsgi;
+            include uwsgi_params;
+            uwsgi_pass unix:/var/run/uwsgi/uwsgi.sock;
+
+        #root   html;
+        #index  index.html index.htm;
     }
 }
